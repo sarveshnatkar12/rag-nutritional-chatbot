@@ -1,1 +1,103 @@
-"# rag-nutritional-chatbot" 
+#RAG Nutritional Chatbot
+
+A Retrieval-Augmented Generation (RAG) chatbot built from scratch to answer nutrition-related questions from the textbook Human Nutrition: 2020 Edition.
+It uses Supabase as the vector database, OpenAI embeddings, and a custom-built Next.js frontend for chat interaction.
+
+###Project Overview
+
+This chatbot allows users to ask questions about nutrition.
+It searches through the embedded nutrition textbook, retrieves the most relevant text chunks, and generates responses with cited references.
+
+###Tech Stack
+
+Frontend: Next.js (TypeScript)
+Backend API: Next.js route handlers
+Database: Supabase (PostgreSQL + pgvector)
+Embeddings Model: text-embedding-3-small
+LLM: OpenAI GPT models
+PDF Processing: PyMuPDF (fitz)
+Environment Management: python-dotenv
+
+###Project Structure
+```
+rag-nutritional-chatbot/
+│
+├── ingest.py                # Extracts, chunks, and uploads embeddings to Supabase
+├── test_embeddings.py       # Tests retrieval from Supabase
+│
+├── src/
+│   └── app/
+│       └── api/
+│           └── chat/
+│               └── route.ts # Chat API endpoint (RAG logic)
+│       └── page.tsx         # Frontend UI for chatbot
+│
+├── .env                     # Environment variables (Supabase + OpenAI keys)
+└── README.md
+```
+
+###Setup Instructions
+1. Clone the Repository
+   ```
+   git clone https://github.com/<your-username>/rag-nutritional-chatbot.git
+    cd rag-nutritional-chatbot
+   ```
+
+2. Set Up Environment Variables
+   Create a .env file in the root directory with:
+  ```
+  SUPABASE_URL=your_supabase_url
+  SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+  OPENAI_API_KEY=your_openai_api_key
+```
+3.Create the Supabase Table
+Run this SQL in your Supabase SQL Editor:
+```
+-- Enable pgvector
+create extension if not exists vector;
+
+create table if not exists public.chunks (
+  id bigserial primary key,
+  doc_id text not null,
+  chunk_index int not null,
+  content text not null,
+  metadata jsonb default '{}'::jsonb,
+  embedding vector(1536)
+);
+
+create index if not exists idx_chunks_embedding
+  on public.chunks using ivfflat (embedding vector_cosine_ops)
+  with (lists = 100);
+
+create or replace function public.match_documents(
+  query_embedding vector(1536),
+  match_count int default 5,
+  filter jsonb default '{}'::jsonb
+)
+returns table (
+  id bigint,
+  doc_id text,
+  chunk_index int,
+  content text,
+  metadata jsonb,
+  similarity float
+)
+language plpgsql
+stable
+as $$
+begin
+  return query
+  select
+    c.id,
+    c.doc_id,
+    c.chunk_index,
+    c.content,
+    c.metadata,
+    1 - (c.embedding <=> query_embedding) as similarity
+  from public.chunks c
+  where (filter = '{}'::jsonb) or (c.metadata @> filter)
+  order by c.embedding <=> query_embedding
+  limit match_count;
+end;
+$$;
+```
