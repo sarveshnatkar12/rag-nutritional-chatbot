@@ -123,17 +123,19 @@ end;
  - Splits it into semantic chunks.
  - Generates embeddings using OpenAI.
  - Uploads to Supabase (vector store).
+---
 **2. Query Pipeline (`route.ts`):**
    - Receives user query.
    - Embeds query text.
    - Fetches top matching chunks from Supabase using `match_documents`.
    - Generates a response citing the retrieved text.
+---
 **3. Frontend (`page.tsx`):**
      - Displays a chat interface for nutrition queries.
      - Renders cited sources and similarity scores.
        -- ## Testing the Retrieval
        ``` python test_embeddings.py ```
-
+---
 --- ## Deployment The project is deployed on **Lovable.app**.
 --- ## License This project is open-source and available under the MIT License. 
 ``` **Paste this into your GitHub `README.md` for a clean, professional project intro!**
