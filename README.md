@@ -16,7 +16,7 @@ Below are screenshots of the deployed chatbot interface on **Lovable App**:
 <img src="assets/Home_Interface.png" width="600"/>
 
 ### 2. Chat Response Example
-<img src="assets/Chat_Responce.png" width="600"/>
+<img src="assets/Chat_Responce_Example.png" width="600"/>
 
 ### 3. Citation Popup
 <img src="assets/Citation_Popup.png" width="600"/>
