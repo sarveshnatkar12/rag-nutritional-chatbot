@@ -125,13 +125,13 @@ Splits it into semantic chunks.
 Generates embeddings using OpenAI.
 Uploads to Supabase (vector store).
    
-2.Query Pipeline (route.ts)
+2.Query Pipeline (route.ts):
    Receives user query.
    Embeds query text.
    Fetches top matching chunks from Supabase using match_documents.
    Generates a response citing the retrieved text.
 
-3.Frontend (page.tsx)
+3.Frontend (page.tsx):
 Displays a chat interface for nutrition queries.
 Renders cited sources and similarity scores.
 
