@@ -1,0 +1,46 @@
+# ---- Python ----
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pkl
+*.sqlite3
+
+# ---- Virtual Environment ----
+venv/
+env/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+
+# ---- Environment Variables ----
+.env
+.env.local
+.env.*.local
+*.env
+*.env.*
+
+# ---- Cache & Logs ----
+*.log
+.cache/
+*.mypy_cache/
+*.pytest_cache/
+*.coverage
+coverage.xml
+
+# ---- VSCode / IDE ----
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ---- Frontend (if applicable, e.g., Lovable / React) ----
+node_modules/
+dist/
+build/
+package-lock.json
+
+# ---- OS / System ----
+.DS_Store
+Thumbs.db
