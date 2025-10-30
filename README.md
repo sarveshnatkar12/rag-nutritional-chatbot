@@ -28,11 +28,17 @@ Below are screenshots of the deployed chatbot interface on **Lovable App**:
 ### Tech Stack
 
 Frontend: Next.js (TypeScript)
+
 Backend API: Next.js route handlers
+
 Database: Supabase (PostgreSQL + pgvector)
+
 Embeddings Model: text-embedding-3-small
+
 LLM: OpenAI GPT models
+
 PDF Processing: PyMuPDF (fitz)
+
 Environment Management: python-dotenv
 
 ### Project Structure
@@ -121,19 +127,27 @@ $$;
 ### How It Works
 
 1.Ingest Pipeline (ingest.py):
+
 Extracts text from the nutrition PDF.
+
 Splits it into semantic chunks.
+
 Generates embeddings using OpenAI.
+
 Uploads to Supabase (vector store).
    
 2.Query Pipeline (route.ts):
-   Receives user query.
-   Embeds query text.
-   Fetches top matching chunks from Supabase using match_documents.
-   Generates a response citing the retrieved text.
+Receives user query.
+
+Embeds query text.
+
+Fetches top matching chunks from Supabase using match_documents.
+
+Generates a response citing the retrieved text.
 
 3.Frontend (page.tsx):
 Displays a chat interface for nutrition queries.
+
 Renders cited sources and similarity scores.
 
 ### Testing the Retrieval
