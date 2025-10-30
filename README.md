@@ -119,11 +119,11 @@ $$;
 ```
 ### How It Works
 
-1.Ingest Pipeline (ingest.py)
-   Extracts text from the nutrition PDF.
-   Splits it into semantic chunks.
-   Generates embeddings using OpenAI.
-   Uploads to Supabase (vector store).
+1.Ingest Pipeline (ingest.py):
+Extracts text from the nutrition PDF.
+Splits it into semantic chunks.
+Generates embeddings using OpenAI.
+Uploads to Supabase (vector store).
    
 2.Query Pipeline (route.ts)
    Receives user query.
