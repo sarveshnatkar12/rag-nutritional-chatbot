@@ -1,11 +1,13 @@
 # RAG Nutritional Chatbot
 
 A Retrieval-Augmented Generation (RAG) chatbot built from scratch to answer nutrition-related questions from the textbook Human Nutrition: 2020 Edition.
+
 It uses Supabase as the vector database, OpenAI embeddings, and a custom-built Next.js frontend for chat interaction.
 
 ### Project Overview
 
 This chatbot allows users to ask questions about nutrition.
+
 It searches through the embedded nutrition textbook, retrieves the most relevant text chunks, and generates responses with cited references.
 
 ##  Frontend Preview
