@@ -1,14 +1,30 @@
-#RAG Nutritional Chatbot
+# RAG Nutritional Chatbot
 
 A Retrieval-Augmented Generation (RAG) chatbot built from scratch to answer nutrition-related questions from the textbook Human Nutrition: 2020 Edition.
 It uses Supabase as the vector database, OpenAI embeddings, and a custom-built Next.js frontend for chat interaction.
 
-###Project Overview
+### Project Overview
 
 This chatbot allows users to ask questions about nutrition.
 It searches through the embedded nutrition textbook, retrieves the most relevant text chunks, and generates responses with cited references.
 
-###Tech Stack
+##  Frontend Preview
+
+Below are screenshots of the deployed chatbot interface on **Lovable App**:
+
+### 1. Home Interface
+<img src="assets/Home_Interface.png" width="600"/>
+
+### 2. Chat Response Example
+<img src="assets/Chat_Responce.png" width="600"/>
+
+### 3. Citation Popup
+<img src="assets/Citation_Popup.png" width="600"/>
+
+### 4. Similar Pages Section
+<img src="assets/Similar_Pages_Section.png" width="600"/>
+
+### Tech Stack
 
 Frontend: Next.js (TypeScript)
 Backend API: Next.js route handlers
@@ -18,7 +34,7 @@ LLM: OpenAI GPT models
 PDF Processing: PyMuPDF (fitz)
 Environment Management: python-dotenv
 
-###Project Structure
+### Project Structure
 ```
 rag-nutritional-chatbot/
 │
@@ -36,7 +52,7 @@ rag-nutritional-chatbot/
 └── README.md
 ```
 
-###Setup Instructions
+### Setup Instructions
 1. Clone the Repository
    ```
    git clone https://github.com/<your-username>/rag-nutritional-chatbot.git
@@ -101,3 +117,29 @@ begin
 end;
 $$;
 ```
+### How It Works
+
+1.Ingest Pipeline (ingest.py)
+   Extracts text from the nutrition PDF.
+   Splits it into semantic chunks.
+   Generates embeddings using OpenAI.
+   Uploads to Supabase (vector store).
+   
+2.Query Pipeline (route.ts)
+   Receives user query.
+   Embeds query text.
+   Fetches top matching chunks from Supabase using match_documents.
+   Generates a response citing the retrieved text.
+
+3.Frontend (page.tsx)
+Displays a chat interface for nutrition queries.
+Renders cited sources and similarity scores.
+
+### Testing the Retrieval
+```
+python test_embeddings.py
+```
+### Deployment
+The project is deployed on Lovable.app 
+### License
+This project is open-source and available under the MIT License.
