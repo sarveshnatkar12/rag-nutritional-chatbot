@@ -141,5 +141,5 @@ end;
 
 ## Deployment The project is deployed on **Lovable.app**.
 ## License This project is open-source and available under the MIT License. 
-``` **Paste this into your GitHub `README.md` for a clean, professional project intro!**
+
 
